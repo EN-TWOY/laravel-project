@@ -71,24 +71,25 @@
     <div class="p-5 table-responsive">
         {{-- Btn Save --}}
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSave">Agregar</button>
-        <table class="table table-striped table-bordered table-dark">
-            <thead>
+        <a class="mr-3 btn btn-dark" href="{{ route('contact.index') }}">Ir a la página de contacto</a>
+        <table class="table table-striped table-bordered mt-3">
+            <thead class="table-success">
               <tr>
-                <th scope="col">ID</th>
+                <th class="text-center" scope="col">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Telefono</th>
-                <th scope="col">Action</th>
+                <th class="text-center" scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
                 @foreach($datos as $item)
                 <tr>
-                    <th>{{$item->usuario_id}}</th>
+                    <th class="text-center">{{$item->usuario_id}}</th>
                     <td>{{$item->nombre}}</td>
                     <td>{{$item->correo}}</td>
                     <td>{{$item->telefono}}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="" class="btn btn-warning btn-sm" 
                         data-bs-toggle="modal" data-bs-target="#modalUpdate{{$item->usuario_id}}">Update</a>
                         <a href="{{route("user.delete",$item->usuario_id)}}" onclick="return res()"
