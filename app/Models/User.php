@@ -17,11 +17,25 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    /* protected $fillable = [
         'name',
         'email',
         'password',
-    ];
+    ]; */
+
+    protected $table = 'usuario';
+    protected $primarykey = 'usuario_id';
+    protected $fillable = ['
+        nombre,
+        correo,
+        telefono
+    '];
+
+
+    /* public function comentario()
+    {
+        return $this->hasOne(Comment::class, 'usuario_id', 'id_usuario');
+    } */
 
     /**
      * The attributes that should be hidden for serialization.

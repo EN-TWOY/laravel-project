@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Mensaje;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -18,9 +17,9 @@ class ContactController extends Controller
     public function send(Request $request)
     {
         $mensaje = new Mensaje();
-        $mensaje->nombre = $request->input('nombre');
-        $mensaje->email = $request->input('email');
-        $mensaje->mensaje = $request->input('mensaje');
+        $mensaje->nombre = $request->input('txtnombre');
+        $mensaje->email = $request->input('txtemail');
+        $mensaje->mensaje = $request->input('txtmensaje');
         $mensaje->save();
 
         // Redirige a la página de contacto con un mensaje de éxito

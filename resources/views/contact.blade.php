@@ -25,17 +25,17 @@
     
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" required>
+                <input type="text" class="form-control" name="txtnombre" required>
             </div>
     
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" required>
+                <input type="email" class="form-control" name="txtemail" required>
             </div>
     
             <div class="form-group mb-4">
                 <label for="mensaje">Mensaje:</label>
-                <textarea class="form-control" name="mensaje" rows="5" required></textarea>
+                <textarea class="form-control" name="txtmensaje" rows="5" required></textarea>
             </div>
     
             <button type="submit" class="btn btn-primary">Enviar Mensaje</button>

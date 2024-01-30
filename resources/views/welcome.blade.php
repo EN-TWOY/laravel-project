@@ -10,6 +10,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
+
+    <nav class="navbar navbar-expand navbar-light bg-dark">
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active text-white" href="{{'/'}}" aria-current="page"
+                    >PROYECTO LARAVEL<span class="visually-hidden">(current)</span></a
+                >
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('user.index') }}">Usuario</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('comment.index') }}">Comentario</a>
+            </li>
+        </ul>
+    </nav>
+
     <h1 class="text-center text-bold text-danger">CRUD en Laravel</h1>
 
     @if(session("success"))

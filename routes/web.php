@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,9 @@ Route::post("/actualizar-usuario", [UserController::class, "update"])->name("use
 Route::get("/eliminar-usuario-{id}", [UserController::class, "delete"])->name("user.delete");
 Route::get("/contact", [ContactController::class, "index"])->name("contact.index");
 Route::post("/enviar-mensaje", [ContactController::class, "send"])->name("contact.send");
+Route::get("/comment", [CommentController::class, "index"])->name("comment.index");
+Route::post("/registrar-comentario", [CommentController::class, "create"])->name("comment.create");
+Route::post("/actualizar-comentario", [CommentController::class, "update"])->name("comment.update");
+Route::get("/eliminar-comentario-{id}", [CommentController::class, "delete"])->name("comment.delete");
 
 
