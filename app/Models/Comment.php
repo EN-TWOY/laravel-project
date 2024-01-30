@@ -14,9 +14,10 @@ class Comment extends Model
         'fecha_comentario',
         'usuario_id'
     ];
+    public $timestamps = false;
     use HasFactory;
 
     public function usuario() { 
-        return $this->belongsTo(User::class, 'usuario_id', 'usuario_id');
+        return $this->belongsTo(User::class, 'comentario_id', 'usuario_id');
     }
 }

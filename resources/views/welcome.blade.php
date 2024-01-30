@@ -107,7 +107,7 @@
                     <td>{{$item->correo}}</td>
                     <td>{{$item->telefono}}</td>
                     <td class="text-center">
-                        <a href="" class="btn btn-warning btn-sm" 
+                        <a class="btn btn-warning btn-sm" 
                         data-bs-toggle="modal" data-bs-target="#modalUpdate{{$item->usuario_id}}">Update</a>
                         <a href="{{route("user.delete",$item->usuario_id)}}" onclick="return res()"
                             class="btn btn-danger btn-sm">Delete</a>

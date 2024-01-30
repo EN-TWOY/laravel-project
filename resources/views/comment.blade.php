@@ -20,6 +20,13 @@
 
     <body>
 
+        <script>
+            var res=function() {
+                var not=confirm("Estas seguro de eliminar?");
+                return not;
+            }
+        </script>
+
         <nav class="navbar navbar-expand navbar-light bg-dark">
             <ul class="nav navbar-nav">
                 <li class="nav-item">
@@ -36,10 +43,66 @@
             </ul>
         </nav>
 
+        <!-- Modal Save -->
+        <div class="modal fade" id="modalSave" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Guardar Datos</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{-- Form Save --}}
+                        <form action="{{route("comment.create")}}" method="POST">
+                            @csrf
+                            <div class="mb-3 row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Contenido</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="staticEmail" name="txtcontenido">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Fecha</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="staticEmail" name="txtfecha">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
+                                <select class="col-sm-10">
+                                    @foreach($users as $us)
+                                        <option value="{{$us->usuario_id}}">
+                                            {{$us->nombre}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            {{-- Btns --}}
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if(session("error"))
+            <div class="alert alert-danger">
+                {{session("error")}}
+            </div>
+        @endif
+
         <main>
             <div class="p-5 table-responsive">
                 {{-- Btn Save --}}
-                <a class="mr-3 btn btn-dark">Agregar Comentario</a>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSave">Agregar</button>
                 <table class="table table-striped table-bordered mt-3">
                     <thead class="table-success">
                       <tr>
@@ -58,9 +121,65 @@
                             <td>{{$item->fecha_comentario}}</td>
                             <td>{{$item->usuario->nombre}}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-warning btn-sm">Update</a>
-                                <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                <a class="btn btn-warning btn-sm" 
+                                    data-bs-toggle="modal" data-bs-target="#modalUpdate{{$item->comentario_id}}">Update</a>
+                                    <a href="{{route("user.delete",$item->comentario_id)}}" onclick="return res()"
+                                        class="btn btn-danger btn-sm">Delete</a>
                             </td>
+
+                            <!-- Modal Update -->
+                            <div class="modal fade" id="modalUpdate{{$item->comentario_id}}"" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Guardar Datos</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{-- Form Update --}}
+                                            <form action="{{route("comment.update")}}" method="POST">
+                                                @csrf
+                                                <div class="mb-3 row">
+                                                    <label for="staticEmail" class="col-sm-2 col-form-label">ID</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" value="{{$item->comentario_id}}"
+                                                        id="staticEmail">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="staticEmail" class="col-sm-2 col-form-label">Contenido</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" value="{{$item->contenido}}"
+                                                        id="staticEmail" name="txtcontenido">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="staticEmail" class="col-sm-2 col-form-label">Fecha</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" value="{{$item->fecha_comentario}}"
+                                                        id="staticEmail" name="txtfecha">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="staticEmail" class="col-sm-2 col-form-label">Usuario</label>
+                                                    <select class="col-sm-10" name="txtusuario">
+                                                        @foreach($users as $us)
+                                                            <option value="{{$us->usuario_id}}">
+                                                                {{$us->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                {{-- Btns --}}
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
                         @endforeach
                     </tbody>
